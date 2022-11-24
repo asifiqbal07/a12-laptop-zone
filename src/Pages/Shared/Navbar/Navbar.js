@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { FaSortDown } from "react-icons/fa";
 // import { FaUser } from "react-icons/fa";
 
 const Navbar = () => {
@@ -13,7 +14,17 @@ const Navbar = () => {
 
     const menuItems = <>
         <li><Link to='/'>Home</Link></li>
-        <li><Link to='/packages'>Packages</Link></li>
+        <li tabIndex={0} className=''>
+            <Link className="justify-between">
+                Parent <FaSortDown></FaSortDown>
+            
+            </Link>
+            <ul className="p-2">
+                <li className='btn hover:text-[#fb6230] rounded-none'><Link to='/laptops/hp'>HP</Link></li>
+                <li className='btn hover:text-[#fb6230] rounded-none'><Link to='/laptops/dell'>DELL</Link></li>
+                <li className='btn hover:text-[#fb6230] rounded-none'><Link to='/laptops/lenovo'>Lenovo</Link></li>
+            </ul>
+        </li>
         <li><Link to='/blogs'>Blogs</Link></li>
         <li><Link to='/login'>Login</Link></li>
         <li><Link to='/signup'>Sign Up</Link></li>
@@ -44,14 +55,21 @@ const Navbar = () => {
                         {menuItems}
                     </ul>
                 </div>
+
+
+                {/* Company Name */}
                 <Link to='/' className="normal-case text-xl transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 duration-300 ">
                     <div className='flex items-center'>
                         <div className='mr-5'><span className='text-4xl font-bold'>Laptop <span className='text-[#fb6230]'>Zone</span></span></div>
                     </div>
                 </Link>
+                {/*  */}
+
             </div>
+
+
             <div className="navbar-center hidden lg:flex">
-                <ul className="menu menu-horizontal p-0 transition transform hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:transform-none">
+                <ul className="menu menu-horizontal p-0 ">
                     {menuItems}
                 </ul>
             </div>
@@ -59,9 +77,9 @@ const Navbar = () => {
 
                 <ul className="menu menu-horizontal p-0 transition transform hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:transform-none mr-3">
                     <ul >
-                       
-                                <Link className='font-semibold' to='/profile'>Name</Link>
-                                
+
+                        <Link className='font-semibold' to='/profile'>Name</Link>
+
                     </ul>
                     {/* <ul >
                         {
