@@ -1,16 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { FaSortDown } from "react-icons/fa";
 // import { FaUser } from "react-icons/fa";
+import { AuthContext } from '../../../Context/AuthProvider';
 
 const Navbar = () => {
-    // const { user, logOut } = useContext(AuthContext);
+    const { user, logOut } = useContext(AuthContext);
 
-    // const handleLogOut = () => {
-    //     logOut()
-    //         .then(() => { })
-    //         .catch(e => console.error(e))
-    // }
+    const handleLogOut = () => {
+        logOut()
+            .then(() => { })
+            .catch(e => console.error(e))
+    }
 
     const menuItems = <>
         <li><Link to='/'>Home</Link></li>
@@ -26,23 +27,19 @@ const Navbar = () => {
             </ul>
         </li>
         <li><Link to='/blogs'>Blogs</Link></li>
-        <li><Link to='/login'>Login</Link></li>
-        <li><Link to='/signup'>Sign Up</Link></li>
-        {/* <li>{
+        <li>{
             user?.uid ?
                 <>
-
-                    <Link to='/reviews'>My Reviews</Link>
                     <Link to='/addpackage'>Add Package</Link>
+                    <Link to='/dashboard'>Dashboard</Link>
                     <button onClick={handleLogOut} className="btn btn-ghost border-0 rounded-none hover:rounded-none">LogOut</button>
-                    <Link to='/profile'>{user?.displayName}</Link>
                 </>
                 :
                 <>
                     <Link to='/login'>Login</Link>
                     <Link to='/signup'>Sign Up</Link>
                 </>
-        }</li> */}
+        }</li>
     </>
     return (
         <div className="navbar bg-base-100 my-2 lg:px-28">
@@ -77,18 +74,13 @@ const Navbar = () => {
 
                 <ul className="menu menu-horizontal p-0 transition transform hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:transform-none mr-3">
                     <ul >
-
-                        <Link className='font-semibold' to='/profile'>Name</Link>
-
-                    </ul>
-                    {/* <ul >
                         {
                             user?.uid ?
                                 <Link className='font-semibold' to='/profile'>{user?.displayName}</Link>
                                 :
                                 <></>
                         }
-                    </ul> */}
+                    </ul>
                 </ul>
                 <ul className="menu menu-horizontal p-0 transition transform hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:transform-none">
                     {/* <Link to='/profile'>{user?.photoURL ?
