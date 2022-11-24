@@ -16,7 +16,7 @@ const Navbar = () => {
         <li><Link to='/'>Home</Link></li>
         <li tabIndex={0} className=''>
             <Link className="justify-between">
-                Parent <FaSortDown></FaSortDown>
+                Laptops <FaSortDown></FaSortDown>
             
             </Link>
             <ul className="p-2">

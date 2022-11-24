@@ -10,7 +10,7 @@ const HomeCategories = () => {
             <h1 className="mb-5 text-3xl font-bold py-1 text-center">Explore By <span className='text-[#fb6230]'>Brands</span></h1>
 
             <div className='grid gap-24 grid-cols-3 mt-16'>
-                <Link to='/hplaptops'>
+                <Link to='/laptops/hp'>
                     <div className="card bg-base-100 shadow-xl transition ease-in-out delay-130  hover:-translate-y-1 hover:scale-110 duration-200 border-t-[8px] border-[#fb6230] rounded-t-lg">
                         <figure className="p4">
                             <img src={hp} alt="" className="rounded-xl h-[60px] mt-8" />
@@ -21,7 +21,7 @@ const HomeCategories = () => {
                         </div>
                     </div>
                 </Link>
-                <Link to='/delllaptops'>
+                <Link to='/laptops/dell'>
                     <div className="card bg-base-100 shadow-xl  transition ease-in-out delay-130  hover:-translate-y-1 hover:scale-110 duration-200 border-t-[8px] border-[#fb6230] rounded-t-lg">
                         <figure className="p4">
                             <img src={dell} alt="" className="rounded-xl h-[60px] mt-8" />
@@ -32,7 +32,7 @@ const HomeCategories = () => {
                         </div>
                     </div>
                 </Link>
-                <Link to='/lenovolaptops'>
+                <Link to='/laptops/lenovo'>
                     <div className="card bg-base-100 shadow-xl  transition ease-in-out delay-130  hover:-translate-y-1 hover:scale-110 duration-200 border-t-[8px] border-[#fb6230] rounded-t-lg">
                         <figure className="p4">
                             <img src={lenovo} alt="" className="rounded-xl h-[60px] mt-8" />
