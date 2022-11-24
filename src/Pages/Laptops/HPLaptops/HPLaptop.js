@@ -2,7 +2,7 @@ import React from 'react';
 import { FaMapMarkerAlt } from "react-icons/fa";
 
 const HPLaptop = ({ hpLaptop, setProductBooking }) => {
-    const { title, image_url, details, location, original_price, posted, resale_price, years_of_use } = hpLaptop;
+    const { title, image_url, details, location, original_price, posted, resale_price, years_of_use, seller_name } = hpLaptop;
     console.log(hpLaptop);
     return (
         <div>
@@ -20,11 +20,15 @@ const HPLaptop = ({ hpLaptop, setProductBooking }) => {
                         <span className='font-semibold text-md'>Years of Use: {years_of_use}</span>
                     </div>
                     <hr />
+                    <div className='flex justify-between '>
                     <span className='font-semibold text-md'>Original Price: {original_price}tk</span>
+                    <span>Posted: {posted}</span>
+                    </div>
                     <hr />
                     <div className='flex justify-between'>
+                    <span className='font-semibold text-md'>Seller Name: {seller_name}tk</span>
                         <span className='flex items-center text-md'><FaMapMarkerAlt className='mt-1 mr-2'></FaMapMarkerAlt>{location}</span>
-                        <span>Posted: {posted}</span>
+                        
                     </div>
 
 
