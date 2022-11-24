@@ -1,5 +1,6 @@
 import React from 'react';
 import { useLoaderData } from 'react-router-dom';
+import BookingModal from '../BookingModal/BookingModal';
 import HPLaptop from './HPLaptop';
 
 const HPLaptops = () => {
@@ -16,6 +17,7 @@ const HPLaptops = () => {
                ></HPLaptop>)
             }
         </div>
+        <BookingModal></BookingModal>
         </div>
     );
 };

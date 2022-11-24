@@ -27,8 +27,8 @@ const HPLaptop = ({ hpLaptop }) => {
                     <span>Posted: {posted}</span>
                     </div>
                     
-                        <button className="btn bg-[#fb6230] hover:bg-white hover:text-[#fb6230] border-0 rounded-none mt-3 hover:border hover:border-[#fb6230]">Book Now</button>
-                    
+                        
+                        <label htmlFor="booking-modal" className="btn bg-[#fb6230] hover:bg-white hover:text-[#fb6230] border-0 rounded-none mt-3 hover:border hover:border-[#fb6230]">Book Now</label>
                 </div>
             </div>
         </div>
