@@ -3,7 +3,6 @@ import { FaMapMarkerAlt } from "react-icons/fa";
 
 const DellLaptop = ({ dellLaptop, setProductBooking }) => {
     const { title, image_url, details, location, original_price, posted, resale_price, years_of_use, seller_name } = dellLaptop;
-    console.log(dellLaptop);
     return (
         <div>
             <div className="card card-compact bg-base-200 shadow-xl rounded-none flex">

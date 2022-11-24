@@ -23,6 +23,7 @@ const DellLaptops = () => {
                 productBooking &&
                 <BookingModal
                     productBooking={productBooking}
+                    setProductBooking={setProductBooking}
                 ></BookingModal>
             }
         </div>

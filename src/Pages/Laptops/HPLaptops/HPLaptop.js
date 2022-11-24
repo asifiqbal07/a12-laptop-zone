@@ -3,7 +3,6 @@ import { FaMapMarkerAlt } from "react-icons/fa";
 
 const HPLaptop = ({ hpLaptop, setProductBooking }) => {
     const { title, image_url, details, location, original_price, posted, resale_price, years_of_use, seller_name } = hpLaptop;
-    console.log(hpLaptop);
     return (
         <div>
             <div className="card card-compact bg-base-200 shadow-xl rounded-none flex">
@@ -32,7 +31,8 @@ const HPLaptop = ({ hpLaptop, setProductBooking }) => {
                     </div>
 
 
-                    <label onClick={() => setProductBooking(hpLaptop)}
+                    <label
+                    onClick={() => setProductBooking(hpLaptop)}
                         htmlFor="booking-modal"
                         className="btn bg-[#fb6230] hover:bg-white hover:text-[#fb6230] border-0 rounded-none mt-3 hover:border hover:border-[#fb6230]"
                     >Book Now</label>
