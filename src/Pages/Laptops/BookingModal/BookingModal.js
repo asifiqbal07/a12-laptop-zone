@@ -1,10 +1,11 @@
 import React, { useContext } from 'react';
+import toast from 'react-hot-toast';
 import { AuthContext } from '../../../Context/AuthProvider';
 
 const BookingModal = ({ productBooking, setProductBooking }) => {
 
-    const { title, resale_price } = productBooking;
-    
+    const { title, resale_price, image_url} = productBooking;
+
     const { user } = useContext(AuthContext);
 
     const handleBooking = event => {
@@ -19,15 +20,38 @@ const BookingModal = ({ productBooking, setProductBooking }) => {
         const booking = {
             name: name,
             productBooking: title,
+            image_url: image_url,
             email,
             phone,
             meetingLocation,
             price,
-            
+
         }
 
         console.log(booking);
-        setProductBooking(null);
+        
+
+        fetch('http://localhost:5000/bookings', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(booking)
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data);
+            if (data.acknowledged) {
+                setProductBooking(null);
+                toast.success('Booking confirmed');
+            }
+            else{
+                toast.error(data.message);
+            }
+
+
+            })
+
     }
 
     return (
@@ -38,7 +62,7 @@ const BookingModal = ({ productBooking, setProductBooking }) => {
                     <label htmlFor="booking-modal" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
                     <h3 className="text-lg font-bold lg:w-96">{title}</h3>
                     <form onSubmit={handleBooking} className='grid grid-cols-1 gap-3 mt-10'>
-                        
+
                         <input name="name" type="text" defaultValue={user?.displayName} disabled placeholder="Your Name" className="input w-full input-bordered" />
 
                         <input name="email" type="email" defaultValue={user?.email} disabled placeholder="Email Address" className="input w-full input-bordered" />
@@ -47,7 +71,7 @@ const BookingModal = ({ productBooking, setProductBooking }) => {
 
                         <input name="phone" type="text" placeholder="Phone Number" className="input w-full input-bordered" required />
 
-                        <input name="meetingLocation" type="text" placeholder="Meeting Location" className="input w-full input-bordered" required/>
+                        <input name="meetingLocation" type="text" placeholder="Meeting Location" className="input w-full input-bordered" required />
                         <br />
                         <input className='btn btn-accent w-full' type="submit" value="Submit" />
                     </form>

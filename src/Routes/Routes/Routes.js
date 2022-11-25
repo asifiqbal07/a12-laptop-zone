@@ -1,6 +1,8 @@
 import { createBrowserRouter } from "react-router-dom";
+import DashboardLayout from "../../Layout/DashboardLayout";
 import Main from "../../Layout/Main";
 import Dashboard from "../../Pages/Dashboard/Dashboard/Dashboard";
+import MyBookings from "../../Pages/Dashboard/MyBookings/MyBookings";
 import Home from "../../Pages/Home/Home/Home";
 import DellLaptops from "../../Pages/Laptops/DellLaptops/DellLaptops";
 import LenovoLaptops from "../../Pages/Laptops/DellLaptops/LenovoLaptops/LenovoLaptops";
@@ -28,28 +30,29 @@ export const router = createBrowserRouter([
             },
             {
                 path: "/laptops/hp",
-                element: <HPLaptops></HPLaptops>,
+                element: <PrivateRoutes><HPLaptops></HPLaptops></PrivateRoutes>,
                 loader: ({ params }) => fetch(`http://localhost:5000/laptops/hp`)
             },
             {
-                path: "/laptops/hp/:id",
-                element: <HPLaptops></HPLaptops>,
-                loader: ({ params }) => fetch(`http://localhost:5000/laptops/hp/${params.id}`)
-            },
-            {
                 path: "/laptops/dell",
-                element: <DellLaptops></DellLaptops>,
+                element: <PrivateRoutes><DellLaptops></DellLaptops></PrivateRoutes>,
                 loader: ({ params }) => fetch(`http://localhost:5000/laptops/dell`)
             },
             {
                 path: "/laptops/lenovo",
-                element: <LenovoLaptops></LenovoLaptops>,
+                element: <PrivateRoutes><LenovoLaptops></LenovoLaptops></PrivateRoutes>,
                 loader: ({ params }) => fetch(`http://localhost:5000/laptops/lenovo`)
             },
         ]
     },
     {
         path: "/dashboard",
-        element: <PrivateRoutes><Dashboard></Dashboard></PrivateRoutes>,
+        element: <PrivateRoutes><DashboardLayout></DashboardLayout></PrivateRoutes>,
+        children: [
+            {
+                path:'/dashboard',
+                element: <MyBookings></MyBookings>
+            }
+        ]
     },
 ])
