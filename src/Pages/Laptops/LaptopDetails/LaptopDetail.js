@@ -1,8 +1,8 @@
 import React from 'react';
 import { FaMapMarkerAlt } from "react-icons/fa";
 
-const LenovoLaptop = ({ lenovoLaptop, setProductBooking }) => {
-    const { title, image_url, details, location, original_price, posted, resale_price, years_of_use, seller_name } = lenovoLaptop;
+const LaptopDetail = ({ laptop, setProductBooking }) => {
+    const { title, image_url, details, location, original_price, posted, resale_price, years_of_use, seller_name } = laptop;
     return (
         <div>
             <div className="card card-compact bg-base-200 shadow-xl rounded-none flex">
@@ -20,18 +20,19 @@ const LenovoLaptop = ({ lenovoLaptop, setProductBooking }) => {
                     </div>
                     <hr />
                     <div className='flex justify-between '>
-                    <span className='font-semibold text-md'>Original Price: {original_price}tk</span>
-                    <span>Posted: {posted}</span>
+                        <span className='font-semibold text-md'>Original Price: {original_price}tk</span>
+                        <span>Posted: {posted}</span>
                     </div>
                     <hr />
                     <div className='flex justify-between'>
-                    <span className='font-semibold text-md'>Seller Name: {seller_name}tk</span>
+                        <span className='font-semibold text-md'>Seller Name: {seller_name}tk</span>
                         <span className='flex items-center text-md'><FaMapMarkerAlt className='mt-1 mr-2'></FaMapMarkerAlt>{location}</span>
-                        
+
                     </div>
 
 
-                    <label onClick={() => setProductBooking(lenovoLaptop)}
+                    <label
+                        onClick={() => setProductBooking(laptop)}
                         htmlFor="booking-modal"
                         className="btn bg-[#fb6230] hover:bg-white hover:text-[#fb6230] border-0 rounded-none mt-3 hover:border hover:border-[#fb6230]"
                     >Book Now</label>
@@ -41,4 +42,4 @@ const LenovoLaptop = ({ lenovoLaptop, setProductBooking }) => {
     );
 };
 
-export default LenovoLaptop;
+export default LaptopDetail;
