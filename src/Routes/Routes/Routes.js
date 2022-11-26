@@ -9,6 +9,7 @@ import LenovoLaptops from "../../Pages/Laptops/DellLaptops/LenovoLaptops/LenovoL
 import HPLaptops from "../../Pages/Laptops/HPLaptops/HPLaptops";
 import Login from "../../Pages/Login/Login";
 import SignUp from "../../Pages/Login/SignUp/SignUp";
+import AdminRoute from "../AdminRoute/AdminRoute";
 import PrivateRoutes from "../PrivateRoutes/PrivateRoutes";
 
 export const router = createBrowserRouter([
@@ -55,7 +56,7 @@ export const router = createBrowserRouter([
             },
             {
                 path:'/dashboard/allusers',
-                element: <AllUsers></AllUsers>
+                element: <AdminRoute><AllUsers></AllUsers></AdminRoute>
             },
         ]
     },

@@ -19,7 +19,7 @@ const SignUp = () => {
 
     const handleSignUp = (data) => {
         setSignUPError('');
-        createUser(data.email, data.password)
+        createUser(data.email, data.password, data.role)
             .then(result => {
                 const user = result.user;
                 console.log(user);
@@ -29,7 +29,7 @@ const SignUp = () => {
                 }
                 updateUser(userInfo)
                     .then(() => {
-                        saveUser(data.name, data.email);
+                        saveUser(data.name, data.email, data.role);
                     })
                     .catch(err => console.log(err));
             })
@@ -39,8 +39,8 @@ const SignUp = () => {
             });
     }
 
-    const saveUser = (name, email) => {
-        const user = { name, email };
+    const saveUser = (name, email, role) => {
+        const user = { name, email, role };
         fetch('http://localhost:5000/users', {
             method: 'POST',
             headers: {
@@ -55,40 +55,58 @@ const SignUp = () => {
             })
     }
     return (
-        <div className='h-[800px] flex justify-center items-center'>
-            <div className='w-96 p-7'>
-                <h2 className='text-xl text-center'>Sign Up</h2>
-                <form onSubmit={handleSubmit(handleSignUp)}>
-                    <div className="form-control w-full max-w-xs">
-                        <label className="label"> <span className="label-text">Name</span></label>
-                        <input type="text" {...register("name", {
-                            required: "Name is Required"
-                        })} className="input input-bordered w-full max-w-xs" />
-                        {errors.name && <p className='text-red-500'>{errors.name.message}</p>}
-                    </div>
-                    <div className="form-control w-full max-w-xs">
-                        <label className="label"> <span className="label-text">Email</span></label>
-                        <input type="email" {...register("email", {
-                            required: true
-                        })} className="input input-bordered w-full max-w-xs" />
-                        {errors.email && <p className='text-red-500'>{errors.email.message}</p>}
-                    </div>
-                    <div className="form-control w-full max-w-xs">
-                        <label className="label"> <span className="label-text">Password</span></label>
-                        <input type="password" {...register("password", {
-                            required: "Password is required",
-                            minLength: { value: 6, message: "Password must be 6 characters long" },
-                            pattern: { value: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])/, message: 'Password must have uppercase, number and special characters' }
-                        })} className="input input-bordered w-full max-w-xs" />
-                        {errors.password && <p className='text-red-500'>{errors.password.message}</p>}
-                    </div>
-                    <input className='btn btn-accent w-full mt-4' value="Sign Up" type="submit" />
-                    {signUpError && <p className='text-red-600'>{signUpError}</p>}
-                </form>
-                <p>Already have an account <Link className='text-secondary' to="/login">Please Login</Link></p>
-                <div className="divider">OR</div>
-                <button className='btn btn-outline w-full'>CONTINUE WITH GOOGLE</button>
+        <div className='my-16'>
+            <h2 className='text-4xl text-center font-bold'>Sign Up</h2>
+            <div className=' flex justify-center items-center shadow-lg w-96 mx-auto mt-10'>
+                <div className='p-4'>
 
+                    <form onSubmit={handleSubmit(handleSignUp)}>
+                        <div className="form-control w-96 max-w-xs">
+                            <label className="label"> <span className="label-text">Name</span></label>
+                            <input type="text" {...register("name", {
+                                required: "Name is Required"
+                            })} className="input input-bordered w-96 max-w-xs" />
+                            {errors.name && <p className='text-red-500'>{errors.name.message}</p>}
+                        </div>
+                        <div className="form-control w-96 max-w-xs">
+                            <label className="label"> <span className="label-text">Email</span></label>
+                            <input type="email" {...register("email", {
+                                required: true
+                            })} className="input input-bordered w-96 max-w-xs" />
+                            {errors.email && <p className='text-red-500'>{errors.email.message}</p>}
+                        </div>
+                        <div className="form-control w-96 max-w-xs">
+                            <label className="label"> <span className="label-text">Password</span></label>
+                            <input type="password" {...register("password", {
+                                required: "Password is required",
+                                minLength: { value: 6, message: "Password must be 6 characters long" },
+                                pattern: { value: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])/, message: 'Password must have uppercase, number and special characters' }
+                            })} className="input input-bordered w-96 max-w-xs" />
+                            {errors.password && <p className='text-red-500'>{errors.password.message}</p>}
+                        </div>
+
+                        {/* Toggle */}
+                        <div className="form-control w-full ">
+                            <label className="label"> <span className="label-text">Select Your Profile</span></label>
+                            <div className="input-group w-full">
+                                <select {...register("role", {
+                                    required: true
+                                })}
+                                    className="select select-bordered">
+                                    <option>buyer</option>
+                                    <option>seller</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <input className='btn bg-[#fb6230] hover:bg-white hover:text-[#fb6230] border-0 w-full my-4 hover:border hover:border-[#fb6230]' value="Sign Up" type="submit" />
+                        {signUpError && <p className='text-red-600'>{signUpError}</p>}
+                    </form>
+                    <p className='mt-2'>Already have an account? <Link className='text-blue-500' to="/login">Please Login...</Link></p>
+                    <div className="divider">OR</div>
+                    <button className='btn btn-outline w-full mb-4'>CONTINUE WITH GOOGLE</button>
+
+                </div>
             </div>
         </div>
     );

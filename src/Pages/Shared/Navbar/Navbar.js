@@ -30,7 +30,7 @@ const Navbar = () => {
         <li>{
             user?.uid ?
                 <>
-                    <Link to='/addpackage'>Add Package</Link>
+                    <Link to='/addproduct'>Add Product</Link>
                     <Link to='/dashboard'>Dashboard</Link>
                     <button onClick={handleLogOut} className="btn btn-ghost border-0 rounded-none hover:rounded-none">LogOut</button>
                 </>

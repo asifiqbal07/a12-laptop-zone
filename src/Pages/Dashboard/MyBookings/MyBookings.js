@@ -13,7 +13,7 @@ const MyBookings = () => {
         queryFn: async () => {
             const res = await fetch(url, {
                 headers: {
-                    authorization: `bearer ${localStorage.getItem('accessToken')}`
+                   authorization: `bearer ${localStorage.getItem('accessToken')}` 
                 }
             });
             const data = await res.json();
@@ -21,11 +21,11 @@ const MyBookings = () => {
         }
     })
 
-console.log(bookings);
+    console.log(bookings);
 
     return (
-        <div className='lg:mr-28 lg:my-6'>
-            <h3 className="text-3xl mb-5">My Orders</h3>
+        <div className='lg:mr-28 '>
+            <h1 className=' font-bold text-4xl mb-20'>My <span className='text-[#fb6230]'>Orders</span></h1>
             <div className="overflow-x-auto">
                 <table className="table w-full">
                     <thead>
@@ -34,7 +34,7 @@ console.log(bookings);
                             <th>Photo</th>
                             <th>Title</th>
                             <th>Price</th>
-                            
+
                         </tr>
                     </thead>
                     <tbody>
@@ -42,7 +42,7 @@ console.log(bookings);
                             bookings &&
                             bookings?.map((booking, i) => <tr key={booking._id}>
                                 <th>{i + 1}</th>
-                                <td className=''><img className='w-10 ' src={booking.image_url} alt=""/></td>
+                                <td className=''><img className='w-10 ' src={booking.image_url} alt="" /></td>
                                 <td>{booking.productBooking}</td>
                                 <td>{booking.price}</td>
                                 {/* <td>
