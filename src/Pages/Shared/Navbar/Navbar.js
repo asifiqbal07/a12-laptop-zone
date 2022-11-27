@@ -3,9 +3,18 @@ import { Link } from 'react-router-dom';
 import { FaSortDown } from "react-icons/fa";
 // import { FaUser } from "react-icons/fa";
 import { AuthContext } from '../../../Context/AuthProvider';
+import { useQuery } from '@tanstack/react-query';
 
 const Navbar = () => {
     const { user, logOut } = useContext(AuthContext);
+    const { data: laptops = [] } = useQuery({
+        queryKey: ['users'],
+        queryFn: async () => {
+            const res = await fetch('http://localhost:5000/laptops');
+            const data = await res.json();
+            return data;
+        }
+    });
 
     const handleLogOut = () => {
         logOut()
@@ -21,16 +30,21 @@ const Navbar = () => {
 
             </Link>
             <ul className="p-2">
-                <li className='btn hover:text-[#fb6230] rounded-none'><Link to='/laptops/hp'>HP</Link></li>
-                <li className='btn hover:text-[#fb6230] rounded-none'><Link to='/laptops/dell'>DELL</Link></li>
-                <li className='btn hover:text-[#fb6230] rounded-none'><Link to='/laptops/lenovo'>Lenovo</Link></li>
+                {
+                    laptops.map(laptop => <Link to={`/laptops/${laptop.id}`}>
+                    <li className='btn p-4 hover:text-[#fb6230] rounded-none '
+                        key={laptop._id}
+                        value={laptop.id}
+                    >{laptop.category}</li>
+                    </Link>)
+                }
+
             </ul>
         </li>
         <li><Link to='/blogs'>Blogs</Link></li>
         <li>{
             user?.uid ?
                 <>
-                    <Link to='/addproduct'>Add Product</Link>
                     <Link to='/dashboard'>Dashboard</Link>
                     <button onClick={handleLogOut} className="btn btn-ghost border-0 rounded-none hover:rounded-none">LogOut</button>
                 </>

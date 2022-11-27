@@ -5,9 +5,9 @@ const LaptopDetail = ({ laptop, setProductBooking }) => {
     const { title, image_url, details, location, original_price, posted, resale_price, years_of_use, seller_name } = laptop;
     return (
         <div>
-            <div className="card card-compact bg-base-200 shadow-xl rounded-none flex">
+            <div className="card card-compact shadow-xl rounded-none flex">
                 <div>
-                    <figure><img src={image_url} alt="Shoes" className='p-2 rounded-lg' /></figure>
+                    <figure><img src={image_url} alt="Shoes" className='p-2 rounded-lg h-[350px]' /></figure>
                 </div>
                 <div className="card-body p-4">
                     <h2 className="card-title">{title}</h2>
@@ -25,7 +25,7 @@ const LaptopDetail = ({ laptop, setProductBooking }) => {
                     </div>
                     <hr />
                     <div className='flex justify-between'>
-                        <span className='font-semibold text-md'>Seller Name: {seller_name}tk</span>
+                        <span className='font-semibold text-md'>Seller Name: {seller_name}</span>
                         <span className='flex items-center text-md'><FaMapMarkerAlt className='mt-1 mr-2'></FaMapMarkerAlt>{location}</span>
 
                     </div>

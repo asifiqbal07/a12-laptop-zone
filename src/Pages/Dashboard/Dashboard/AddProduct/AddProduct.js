@@ -1,3 +1,5 @@
+import { useQuery } from '@tanstack/react-query';
+import { format } from 'date-fns';
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
@@ -10,6 +12,17 @@ const AddProduct = () => {
     const { user } = useContext(AuthContext);
 
     const { register, handleSubmit, formState: { errors } } = useForm();
+
+    const date = format(new Date(), "PP");
+
+    const { data: brands = [] } = useQuery({
+        queryKey: ['Brand'],
+        queryFn: async () => {
+            const res = await fetch('http://localhost:5000/laptops');
+            const data = await res.json();
+            return data;
+        }
+    })
 
     const imageHostKey = process.env.REACT_APP_imgbb_key
 
@@ -28,34 +41,36 @@ const AddProduct = () => {
                 if (imgData.success) {
                     console.log(imgData.data.url)
                 }
-                const laptops =
-                    {
-                        seller_name: user.displayName,
-                        brand: data.category,
-                        title: data.productName,
-                        location: data.location,
-                        resale_price: data.resalePrice,
-                        original_price: data.originalPrice,
-                        years_of_use: data.purchaseDate,
-                        image_url: imgData.data.url,
-                        details: data.details,
-                        posted: "20-20-2022"
-                    }                   
-                
-                fetch('http://localhost:5000/laptops', {
+                const product =
+                {
+                    seller_name: user.displayName,
+                    title: data.productName,
+                    location: data.location,
+                    resale_price: data.resalePrice,
+                    original_price: data.originalPrice,
+                    years_of_use: data.purchaseDate,
+                    image_url: imgData.data.url,
+                    details: data.details,
+                    posted: date,
+                    id: data.category
+                }
+
+                fetch('http://localhost:5000/products', {
                     method: 'POST',
                     headers: {
-                        'content-type': 'application/json', 
+                        'content-type': 'application/json',
                         authorization: `bearer ${localStorage.getItem('accessToken')}`
                     },
-                    body: JSON.stringify(laptops)
+                    body: JSON.stringify(product)
                 })
-                .then(res => res.json())
-                .then(result =>{
-                    console.log(result);
-                    toast.success('Product Added Successfully');
-                    Navigate('/dashboard')
-                })
+                    .then(res => res.json())
+                    .then(result => {
+                        console.log(result);
+                        if (data.acknowledged) {
+                            toast.success("Booking confirmed")
+                            Navigate('/dashboard')
+                        }
+                    })
             })
     }
 
@@ -131,9 +146,14 @@ const AddProduct = () => {
                                         required: true
                                     })}
                                         className="select select-bordered">
-                                        <option>HP</option>
-                                        <option>DELL</option>
-                                        <option>Lenovo</option>
+                                        <option disabled selected>Please Pick Your Brand</option>
+                                        {
+                                            brands.map(brand => <option
+                                                key={brand._id}
+                                                value={brand.id}
+                                            >{brand.category}</option>)
+                                        }
+
                                     </select>
                                 </div>
                             </div>
