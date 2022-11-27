@@ -10,7 +10,9 @@ import LaptopDetails from "../../Pages/Laptops/LaptopDetails/LaptopDetails";
 import Login from "../../Pages/Login/Login";
 import SignUp from "../../Pages/Login/SignUp/SignUp";
 import AdminRoute from "../AdminRoute/AdminRoute";
+import BuyerRoute from "../BuyerRoute/BuyerRoute";
 import PrivateRoutes from "../PrivateRoutes/PrivateRoutes";
+import SellerRoute from "../SellerRoute/SellerRoute";
 
 export const router = createBrowserRouter([
     {
@@ -45,8 +47,8 @@ export const router = createBrowserRouter([
         element: <PrivateRoutes><DashboardLayout></DashboardLayout></PrivateRoutes>,
         children: [
             {
-                path:'/dashboard',
-                element: <MyBookings></MyBookings>
+                path:'/dashboard/myorders',
+                element: <BuyerRoute><MyBookings></MyBookings></BuyerRoute>
             },
             {
                 path:'/dashboard/allusers',
@@ -54,7 +56,7 @@ export const router = createBrowserRouter([
             },
             {
                 path:'/dashboard/addproduct',
-                element: <AddProduct></AddProduct>,
+                element: <SellerRoute><AddProduct></AddProduct></SellerRoute>,
                 loader: () => fetch(`http://localhost:5000/laptops`)
             },
         ]
