@@ -1,14 +1,19 @@
 import { createBrowserRouter } from "react-router-dom";
 import DashboardLayout from "../../Layout/DashboardLayout";
 import Main from "../../Layout/Main";
+import Blogs from "../../Pages/Blogs/Blogs";
 import AllUsers from "../../Pages/Dashboard/AllUsers/AllUsers";
 import AddProduct from "../../Pages/Dashboard/Dashboard/AddProduct/AddProduct";
+import MyProducts from "../../Pages/Dashboard/Dashboard/MyProducts/MyProducts";
 import MyBookings from "../../Pages/Dashboard/MyBookings/MyBookings";
+import ErrorPage from "../../Pages/ErrorPage/ErrorPage";
 import Home from "../../Pages/Home/Home/Home";
 import HomeCategories from "../../Pages/Home/HomeCategories/HomeCategories";
 import LaptopDetails from "../../Pages/Laptops/LaptopDetails/LaptopDetails";
 import Login from "../../Pages/Login/Login";
 import SignUp from "../../Pages/Login/SignUp/SignUp";
+import Footer from "../../Pages/Shared/Footer/Footer";
+import Navbar from "../../Pages/Shared/Navbar/Navbar";
 import AdminRoute from "../AdminRoute/AdminRoute";
 import BuyerRoute from "../BuyerRoute/BuyerRoute";
 import PrivateRoutes from "../PrivateRoutes/PrivateRoutes";
@@ -30,6 +35,10 @@ export const router = createBrowserRouter([
             {
                 path: "/signup",
                 element: <SignUp></SignUp>,
+            },
+            {
+                path: "/blogs",
+                element: <Blogs></Blogs>,
             },
             {
                 path: "/laptops",
@@ -59,6 +68,17 @@ export const router = createBrowserRouter([
                 element: <SellerRoute><AddProduct></AddProduct></SellerRoute>,
                 loader: () => fetch(`http://localhost:5000/laptops`)
             },
+            {
+                path:'/dashboard/myproducts',
+                element: <SellerRoute><MyProducts></MyProducts></SellerRoute>,
+            },
         ]
     },
+    {
+        path: '*', element: <div>
+            <Navbar></Navbar>
+            <ErrorPage></ErrorPage>
+            <Footer></Footer>
+        </div>
+    }
 ])

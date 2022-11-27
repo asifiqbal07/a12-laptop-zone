@@ -31,9 +31,9 @@ const Navbar = () => {
             </Link>
             <ul className="p-2">
                 {
-                    laptops.map(laptop => <Link to={`/laptops/${laptop.id}`}>
+                    laptops.map(laptop => <Link to={`/laptops/${laptop.id}`} key={laptop._id}>
                     <li className='btn p-4 hover:text-[#fb6230] rounded-none '
-                        key={laptop._id}
+                        
                         value={laptop.id}
                     >{laptop.category}</li>
                     </Link>)
