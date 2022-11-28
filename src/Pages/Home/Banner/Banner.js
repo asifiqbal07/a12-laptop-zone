@@ -11,7 +11,7 @@ const Banner = () => {
                     <div><img className='w-48' src={logo} alt="" /></div>
                     <h1 className="mb-5 text-5xl font-bold py-1">Laptop Zone</h1>
                     <p className="mb-5 text-2xl py-3">Used Laptop - For Wholesale & Retail</p>
-                    <button className="btn bg-[#fb6230] hover:bg-white hover:text-[#fb6230]">View Store</button>
+                    <button className="btn bg-[#fb6230] hover:bg-white hover:text-[#fb6230]"><a href="#brands">Laptop Brands</a></button>
                 </div>
             </div>
         </div>

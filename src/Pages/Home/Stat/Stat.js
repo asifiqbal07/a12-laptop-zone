@@ -20,7 +20,7 @@ const Stat = () => {
     return (
         <div className='lg:my-28 mx-auto lg:px-28 my-10'>
             <h2 className='text-4xl text-center font-bold'>Live Products & Active Users Count!</h2>
-            <div className="flex shadow w-full mt-10 rounded-md">
+            <div className="flex shadow-xl w-full mt-10 rounded-md">
 
                 <div className="stat place-items-center">
                     <div className="stat-title">Total Products</div>

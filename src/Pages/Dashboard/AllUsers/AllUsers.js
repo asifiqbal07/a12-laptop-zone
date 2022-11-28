@@ -1,16 +1,43 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import toast from 'react-hot-toast';
+import ConfirmationModal from '../../Shared/ConfirmationModal/ConfirmationModal';
+import Loading from '../../Shared/Loading/Loading';
 
 const AllUsers = () => {
 
-    const [users, setUsers] = useState([])
+    // const [users, setUsers] = useState([]);
+    const [deletingUser, setDeletingUser] = useState(null);
 
-    useEffect(() => {
-        fetch('http://localhost:5000/users')
-            .then(res => res.json())
-            .then(data => setUsers(data))
-    }, []);
+    const closeModal = () => {
+        setDeletingUser(null);
+    }
+
+    const { data: users, isLoading, refetch } = useQuery({
+        queryKey: ['users'],
+        queryFn: async () => {
+            try {
+                const res = await fetch('http://localhost:5000/users', {
+                    headers: {
+                        authorization: `bearer ${localStorage.getItem('accessToken')}`
+                    }
+                });
+                const data = await res.json();
+                return data;
+            }
+            catch (error) {
+
+            }
+        }
+    });
+
+    console.log(users);
+
+    // useEffect(() => {
+    //     fetch('http://localhost:5000/users')
+    //         .then(res => res.json())
+    //         .then(data => setUsers(data))
+    // }, []);
 
     // const handleMakeAdmin = id => {
     //     fetch(`http://localhost:5000/users/admin/${id}`, {
@@ -28,23 +55,43 @@ const AllUsers = () => {
     //         })
     // };
 
-    const handleDelete = id => {
-        const proceed = window.confirm("Are you sure you want to delete the User?")
-        if (proceed) {
-            fetch(`http://localhost:5000/users/${id}`,
-                {
-                    method: 'DELETE'
-                })
-                .then(res => res.json())
-                .then(data => {
-                    console.log(data);
-                    if (data.deletedCount > 0) {
-                        toast.success('deleted successfully');
-                        const remaining = users.filter(rev => rev._id !== id);
-                        setUsers(remaining);
-                    }
-                })
-        }
+    // const handleDelete = id => {
+    //     const proceed = window.confirm("Are you sure you want to delete the User?")
+    //     if (proceed) {
+    //         fetch(`http://localhost:5000/users/${id}`,
+    //             {
+    //                 method: 'DELETE'
+    //             })
+    //             .then(res => res.json())
+    //             .then(data => {
+    //                 console.log(data);
+    //                 if (data.deletedCount > 0) {
+    //                     toast.success('deleted successfully');
+    //                     const remaining = users.filter(rev => rev._id !== id);
+    //                     setUsers(remaining);
+    //                 }
+    //             })
+    //     }
+    // }
+
+    const handleDelete = user => {
+        fetch(`http://localhost:5000/users/${user._id}`, {
+            method: 'DELETE',
+            headers: {
+                authorization: `bearer ${localStorage.getItem('accessToken')}`
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.deletedCount > 0) {
+                    refetch();
+                    toast.success('User deleted successfully')
+                }
+            })
+    }
+
+    if (isLoading) {
+        return <Loading></Loading>
     }
 
     return (
@@ -67,7 +114,7 @@ const AllUsers = () => {
                                 <td>{user.name}</td>
                                 <td>{user.email}</td>
                                 {/* <td>{user?.role !== 'admin' && <button onClick={() => handleMakeAdmin(user._id)} className='btn btn-xs btn-primary'>Make Admin</button>}</td> */}
-                                <td><button onClick={() => handleDelete(user._id)}
+                                <td><button htmlFor="confirmation-modal" onClick={() => handleDelete(user._id)}
                                     className='btn btn-xs btn-danger'>Delete</button></td>
                             </tr>)
                         }
@@ -75,6 +122,17 @@ const AllUsers = () => {
                     </tbody>
                 </table>
             </div>
+            {
+                deletingUser && <ConfirmationModal
+                    title={`Are you sure you want to delete?`}
+                    message={`If you delete. It cannot be undone.`}
+                    successAction={handleDelete}
+                    successButtonName="Delete"
+                    modalData={deletingUser}
+                    closeModal={closeModal}
+                >
+                </ConfirmationModal>
+            }
         </div>
     );
 };

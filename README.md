@@ -1,7 +1,31 @@
-https://github.com/programming-hero-web-course-4/b612-used-products-resale-clients-side-asifiqbal07
+# Readme information for the assignment
 
-https://github.com/programming-hero-web-course-4/b612-used-products-resale-server-side-asifiqbal07
+Project Name: Skill Up
 
+## Server Links - 
++ Server Github Link: https://github.com/programming-hero-web-course-4/b612-used-products-resale-clients-side-asifiqbal07
++ Client Side Link: https://github.com/programming-hero-web-course-4/b612-used-products-resale-server-side-asifiqbal07
+
+## Special features of the website-
+
++ You can Login from 2 different ways. (Email-Pass, Google)
++ You can add your Product.
++ You can see your Added Product.
++ Admin Panel Added.
++ You can Show your Name on the Header if you logged in.
+
+## List of technologies -
+
++ I used Tailwind CSS framework.
++ Server data working by Vercel.
++ Live site is running by Firebase Hosting.
++ Database connected with Mongodb.
++ Twt added.
+
+## Admin ID & Pass -
+
+id: admin@laptopzone.com
+pass: Lz@123
 
 
 # Getting Started with Create React App

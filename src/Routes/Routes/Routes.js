@@ -4,8 +4,10 @@ import Main from "../../Layout/Main";
 import Blogs from "../../Pages/Blogs/Blogs";
 import AllUsers from "../../Pages/Dashboard/AllUsers/AllUsers";
 import AddProduct from "../../Pages/Dashboard/Dashboard/AddProduct/AddProduct";
+import Dashboard from "../../Pages/Dashboard/Dashboard/Dashboard";
 import MyProducts from "../../Pages/Dashboard/Dashboard/MyProducts/MyProducts";
 import MyBookings from "../../Pages/Dashboard/MyBookings/MyBookings";
+import Payment from "../../Pages/Dashboard/Payment/Payment";
 import ErrorPage from "../../Pages/ErrorPage/ErrorPage";
 import Home from "../../Pages/Home/Home/Home";
 import HomeCategories from "../../Pages/Home/HomeCategories/HomeCategories";
@@ -56,12 +58,21 @@ export const router = createBrowserRouter([
         element: <PrivateRoutes><DashboardLayout></DashboardLayout></PrivateRoutes>,
         children: [
             {
+                path:'/dashboard',
+                element: <Dashboard></Dashboard>
+            },
+            {
                 path:'/dashboard/myorders',
                 element: <BuyerRoute><MyBookings></MyBookings></BuyerRoute>
             },
             {
                 path:'/dashboard/allusers',
                 element: <AdminRoute><AllUsers></AllUsers></AdminRoute>
+            },
+            {
+                path:'/dashboard/payment/:id',
+                element: <BuyerRoute><Payment></Payment></BuyerRoute>,
+                loader: ({params}) => fetch(`http://localhost:5000/bookings/${params.id}`)
             },
             {
                 path:'/dashboard/addproduct',

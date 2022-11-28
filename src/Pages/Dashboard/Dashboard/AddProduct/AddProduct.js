@@ -86,9 +86,9 @@ const AddProduct = () => {
         }
 
         return (
-            <div className='my-16'>
-                <h2 className='text-4xl  font-bold'>Add Product</h2>
-                <div className=' flex justify-center items-center shadow-lg w-96 mt-10'>
+            <div className='ml-10'>
+                <h2 className='text-4xl  font-bold ml-20'>Add Product</h2>
+                <div className=' flex justify-center items-center shadow-xl w-96 mt-10'>
                     <div className='p-4'>
 
                         <form onSubmit={handleSubmit(handleAddProduct)}>

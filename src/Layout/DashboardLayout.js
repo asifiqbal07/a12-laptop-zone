@@ -14,32 +14,32 @@ const DashboardLayout = () => {
     const [isSeller] = useSeller(user?.email);
 
     return (
-        <div>
+        <div >
             <Navbar></Navbar>
             <div className="drawer drawer-mobile  lg:my-32">
                 <input id="dashboard-drawer" type="checkbox" className="drawer-toggle" />
                 <div className="drawer-content">
                     <Outlet></Outlet>
                 </div>
-                <div className="drawer-side mt-1 lg:ml-20">
+                <div className="drawer-side lg:ml-20 lg:px-28">
                     <label htmlFor="dashboard-drawer" className="drawer-overlay "></label>
-                    <ul className="menu p-4 w-80 text-base-content bg-white">
+                    <ul className="menu px-4  text-base-content text-lg font-semibold">
                         {
                             isBuyer && <>
-                            <li><Link to="/dashboard">My Orders</Link></li>
+                            <li className='btn bg-white my-2 text-[#fb6230] border-[#fb6230] border'><Link to="/dashboard/myorders">My Orders</Link></li>
                             </>
                         }
 
                         {
                             isAdmin && <>
-                                <li><Link to="/dashboard/allusers">All Users</Link></li>
+                                <li className='btn bg-white my-2 text-[#fb6230] border-[#fb6230] border'><Link to="/dashboard/allusers">All Users</Link></li>
                             </>
                         }
 
                         {
                             isSeller && <>
-                            <li><Link to="/dashboard/addproduct">Add Product</Link></li>
-                            <li><Link to="/dashboard/myproducts">My Products</Link></li>
+                            <li className='btn bg-white my-2 text-[#fb6230] border-[#fb6230] border'><Link to="/dashboard/addproduct">Add Product</Link></li>
+                            <li className='btn bg-white my-2 text-[#fb6230] border-[#fb6230] border'><Link to="/dashboard/myproducts">My Products</Link></li>
                             </>
                         }
                     </ul>

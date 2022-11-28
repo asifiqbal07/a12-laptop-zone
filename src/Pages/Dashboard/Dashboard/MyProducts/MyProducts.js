@@ -8,7 +8,7 @@ const MyProducts = () => {
     const [products, setProducts] = useState([])
 
     useEffect(() => {
-        fetch(`http://localhost:5000/products?email=${user?.email}`, {
+        fetch(`http://localhost:5000/myproducts?email=${user?.email}`, {
             headers: {
                 authorization: `Bearer ${localStorage.getItem('laptopZone-token')}`
             }
@@ -43,6 +43,28 @@ const MyProducts = () => {
         }
     }
 
+    const handleStatusUpdate = id => {
+        fetch(`http://localhost:5000/myproducts/${id}`, {
+            method: 'PATCH',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify({ status: 'Advertised' })
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data.modifiedCount > 0) {
+                    const remaining = products.filter(odr => odr._id !== id);
+                    const approving = products.find(odr => odr._id === id);
+                    approving.status = 'Advertised'
+
+                    const newOrders = [approving, ...remaining];
+                    setProducts(newOrders);
+                }
+            })
+    }
+
 
     return (
         <div className='lg:mr-28 '>
@@ -55,6 +77,7 @@ const MyProducts = () => {
                             <th></th>
                             <th>Title</th>
                             <th>Price</th>
+                            <th>Sales Status</th>
 
                         </tr>
                     </thead>
@@ -82,6 +105,7 @@ const MyProducts = () => {
                                     booking.price && booking.paid && <span className='text-green-500'>Paid</span>
                                 }
                             </td> */}
+                                <td><button onClick={()=> handleStatusUpdate(product._id)} className='btn btn-sm'>{product.status ? product.status : 'Advertise'}</button></td>
                             </tr>)
                         }
                     </tbody>

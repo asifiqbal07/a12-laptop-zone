@@ -4,6 +4,7 @@ import { FaSortDown } from "react-icons/fa";
 // import { FaUser } from "react-icons/fa";
 import { AuthContext } from '../../../Context/AuthProvider';
 import { useQuery } from '@tanstack/react-query';
+import { MdOutlineDashboardCustomize } from "react-icons/md";
 
 const Navbar = () => {
     const { user, logOut } = useContext(AuthContext);
@@ -90,21 +91,15 @@ const Navbar = () => {
                     <ul >
                         {
                             user?.uid ?
-                                <Link className='font-semibold' to='/profile'>{user?.displayName}</Link>
+                                <Link className='font-semibold' to='/'>{user?.displayName}</Link>
                                 :
                                 <></>
                         }
                     </ul>
                 </ul>
                 <ul className="menu menu-horizontal p-0 transition transform hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:transform-none">
-                    {/* <Link to='/profile'>{user?.photoURL ?
-                        <img className='rounded-full h-10 shadow-md' src={user?.photoURL} alt="" />
-                        :
-                        <FaUser></FaUser>
-                    }
-                    </Link> */}
                     <label htmlFor="dashboard-drawer" tabIndex={2} className="btn btn-ghost lg:hidden">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
+                        <MdOutlineDashboardCustomize className='text-xl'></MdOutlineDashboardCustomize>
                     </label>
                 </ul>
             </div>
