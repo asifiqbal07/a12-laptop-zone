@@ -8,7 +8,7 @@ const MyProducts = () => {
     const [products, setProducts] = useState([])
 
     useEffect(() => {
-        fetch(`http://localhost:5000/myproducts?email=${user?.email}`, {
+        fetch(`https://laptop-zone-server.vercel.app/myproducts?email=${user?.email}`, {
             headers: {
                 authorization: `Bearer ${localStorage.getItem('laptopZone-token')}`
             }
@@ -27,7 +27,7 @@ const MyProducts = () => {
     const handleDelete = id => {
         const proceed = window.confirm("Are you sure you want to delete the Product?")
         if (proceed) {
-            fetch(`http://localhost:5000/products/${id}`,
+            fetch(`https://laptop-zone-server.vercel.app/products/${id}`,
                 {
                     method: 'DELETE'
                 })
@@ -44,7 +44,7 @@ const MyProducts = () => {
     }
 
     const handleStatusUpdate = id => {
-        fetch(`http://localhost:5000/myproducts/${id}`, {
+        fetch(`https://laptop-zone-server.vercel.app/myproducts/${id}`, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json'

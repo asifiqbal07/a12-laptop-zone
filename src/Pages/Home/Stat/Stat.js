@@ -6,13 +6,13 @@ const Stat = () => {
     const [users, setUsers] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/products')
+        fetch('https://laptop-zone-server.vercel.app/products')
             .then(res => res.json())
             .then(data => setProducts(data))
     }, []);
 
     useEffect(() => {
-        fetch('http://localhost:5000/users')
+        fetch('https://laptop-zone-server.vercel.app/users')
             .then(res => res.json())
             .then(data => setUsers(data))
     }, []);

@@ -17,7 +17,7 @@ const AllUsers = () => {
         queryKey: ['users'],
         queryFn: async () => {
             try {
-                const res = await fetch('http://localhost:5000/users', {
+                const res = await fetch('https://laptop-zone-server.vercel.app/users', {
                     headers: {
                         authorization: `bearer ${localStorage.getItem('accessToken')}`
                     }
@@ -34,13 +34,13 @@ const AllUsers = () => {
     console.log(users);
 
     // useEffect(() => {
-    //     fetch('http://localhost:5000/users')
+    //     fetch('https://laptop-zone-server.vercel.app/users')
     //         .then(res => res.json())
     //         .then(data => setUsers(data))
     // }, []);
 
     // const handleMakeAdmin = id => {
-    //     fetch(`http://localhost:5000/users/admin/${id}`, {
+    //     fetch(`https://laptop-zone-server.vercel.app/users/admin/${id}`, {
     //         method: 'PUT',
     //         headers: {
     //             authorization: `bearer ${localStorage.getItem('accessToken')}`
@@ -58,7 +58,7 @@ const AllUsers = () => {
     // const handleDelete = id => {
     //     const proceed = window.confirm("Are you sure you want to delete the User?")
     //     if (proceed) {
-    //         fetch(`http://localhost:5000/users/${id}`,
+    //         fetch(`https://laptop-zone-server.vercel.app/users/${id}`,
     //             {
     //                 method: 'DELETE'
     //             })
@@ -75,7 +75,7 @@ const AllUsers = () => {
     // }
 
     const handleDelete = user => {
-        fetch(`http://localhost:5000/users/${user._id}`, {
+        fetch(`https://laptop-zone-server.vercel.app/users/${user._id}`, {
             method: 'DELETE',
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`
