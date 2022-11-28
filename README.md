@@ -1,10 +1,10 @@
 # Readme information for the assignment
 
-Project Name: Skill Up
+Project Name: Laptop Zone
 
 ## Server Links - 
-+ Server Github Link: https://github.com/programming-hero-web-course-4/b612-used-products-resale-clients-side-asifiqbal07
-+ Client Side Link: https://github.com/programming-hero-web-course-4/b612-used-products-resale-server-side-asifiqbal07
++ Server Github Link: https://github.com/programming-hero-web-course-4/b612-used-products-resale-server-side-asifiqbal07
++ Client Side Link: https://github.com/programming-hero-web-course-4/b612-used-products-resale-clients-side-asifiqbal07
 
 ## Special features of the website-
 
