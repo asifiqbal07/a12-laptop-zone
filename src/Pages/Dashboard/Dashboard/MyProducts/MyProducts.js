@@ -8,7 +8,7 @@ const MyProducts = () => {
     const [products, setProducts] = useState([])
 
     useEffect(() => {
-        fetch(`https://laptop-zone-server.vercel.app/myproducts?email=${user?.email}`, {
+        fetch(`http://localhost:5000/myproducts?email=${user?.email}`, {
             headers: {
                 authorization: `Bearer ${localStorage.getItem('laptopZone-token')}`
             }
@@ -27,7 +27,7 @@ const MyProducts = () => {
     const handleDelete = id => {
         const proceed = window.confirm("Are you sure you want to delete the Product?")
         if (proceed) {
-            fetch(`https://laptop-zone-server.vercel.app/products/${id}`,
+            fetch(`http://localhost:5000/products/${id}`,
                 {
                     method: 'DELETE'
                 })
@@ -44,7 +44,7 @@ const MyProducts = () => {
     }
 
     const handleStatusUpdate = id => {
-        fetch(`https://laptop-zone-server.vercel.app/myproducts/${id}`, {
+        fetch(`http://localhost:5000/myproducts/${id}`, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json'
@@ -68,7 +68,7 @@ const MyProducts = () => {
 
     return (
         <div className='lg:mr-28 '>
-            <h1 className=' font-bold text-4xl mb-20'>My <span className='text-[#fb6230]'>Orders</span></h1>
+            <h1 className=' font-bold text-4xl mb-10'>My <span className='text-[#fb6230]'>Products</span></h1>
             <div className="overflow-x-auto">
                 <table className="table w-full">
                     <thead>

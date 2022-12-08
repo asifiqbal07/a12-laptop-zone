@@ -16,12 +16,12 @@ const DashboardLayout = () => {
     return (
         <div >
             <Navbar></Navbar>
-            <div className="drawer drawer-mobile  lg:my-32">
+            <div className="drawer drawer-mobile ">
                 <input id="dashboard-drawer" type="checkbox" className="drawer-toggle" />
-                <div className="drawer-content">
+                <div className="drawer-content pt-10">
                     <Outlet></Outlet>
                 </div>
-                <div className="drawer-side lg:ml-20 lg:px-28">
+                <div className="drawer-side lg:ml-28 lg:px-10 lg:bg-[#fb6230] lg:mx-10 pt-10">
                     <label htmlFor="dashboard-drawer" className="drawer-overlay "></label>
                     <ul className="menu px-4  text-base-content text-lg font-semibold">
                         {

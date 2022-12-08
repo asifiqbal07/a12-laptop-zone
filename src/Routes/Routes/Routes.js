@@ -49,7 +49,7 @@ export const router = createBrowserRouter([
             {
                 path: "/laptops/:id",
                 element: <PrivateRoutes><LaptopDetails></LaptopDetails></PrivateRoutes>,
-                loader: ({params}) => fetch(`https://laptop-zone-server.vercel.app/laptops/${params.id}`)
+                loader: ({params}) => fetch(`http://localhost:5000/laptops/${params.id}`)
             }
         ]
     },
@@ -72,12 +72,12 @@ export const router = createBrowserRouter([
             {
                 path:'/dashboard/payment/:id',
                 element: <BuyerRoute><Payment></Payment></BuyerRoute>,
-                loader: ({params}) => fetch(`https://laptop-zone-server.vercel.app/bookings/${params.id}`)
+                loader: ({params}) => fetch(`http://localhost:5000/bookings/${params.id}`)
             },
             {
                 path:'/dashboard/addproduct',
                 element: <SellerRoute><AddProduct></AddProduct></SellerRoute>,
-                loader: () => fetch(`https://laptop-zone-server.vercel.app/laptops`)
+                loader: () => fetch(`http://localhost:5000/laptops`)
             },
             {
                 path:'/dashboard/myproducts',

@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { FaSortDown } from "react-icons/fa";
-// import { FaUser } from "react-icons/fa";
 import { AuthContext } from '../../../Context/AuthProvider';
 import { useQuery } from '@tanstack/react-query';
 import { MdOutlineDashboardCustomize } from "react-icons/md";
@@ -11,7 +10,7 @@ const Navbar = () => {
     const { data: laptops = [] } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
-            const res = await fetch('https://laptop-zone-server.vercel.app/laptops');
+            const res = await fetch('http://localhost:5000/laptops');
             const data = await res.json();
             return data;
         }
@@ -24,8 +23,8 @@ const Navbar = () => {
     }
 
     const menuItems = <>
-        <li><Link to='/'>Home</Link></li>
-        <li tabIndex={0} className=''>
+        <li className='hover:text-[#fb6230]'><Link to='/'>Home</Link></li>
+        <li tabIndex={0} className='hover:text-[#fb6230]'>
             <Link className="justify-between">
                 Laptops <FaSortDown></FaSortDown>
 
@@ -42,22 +41,22 @@ const Navbar = () => {
 
             </ul>
         </li>
-        <li><Link to='/blogs'>Blogs</Link></li>
+        <li className='hover:text-[#fb6230]'><Link to='/blogs'>Blogs</Link></li>
         <li>{
             user?.uid ?
                 <>
-                    <Link to='/dashboard'>Dashboard</Link>
-                    <button onClick={handleLogOut} className="btn btn-ghost border-0 rounded-none hover:rounded-none">LogOut</button>
+                    <Link className='hover:text-[#fb6230]' to='/dashboard'>Dashboard</Link>
+                    <button onClick={handleLogOut} className="btn btn-ghost border-0 rounded-none hover:rounded-none hover:text-[#fb6230]">LogOut</button>
                 </>
                 :
                 <>
-                    <Link to='/login'>Login</Link>
-                    <Link to='/signup'>Sign Up</Link>
+                    <Link className='hover:text-[#fb6230]' to='/login'>Login</Link>
+                    <Link className='hover:text-[#fb6230]' to='/signup'>Sign Up</Link>
                 </>
         }</li>
     </>
     return (
-        <div className="navbar bg-base-100 my-2 lg:px-28">
+        <div className="navbar mt-0 my-2 lg:px-28 lg:py-4 lg:sticky lg:bg-[#252931] top-0 z-50 mb-0">
             <div className="navbar-start">
                 <div className="dropdown">
                     <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -72,7 +71,7 @@ const Navbar = () => {
                 {/* Company Name */}
                 <Link to='/' className="normal-case text-xl transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 duration-300 ">
                     <div className='flex items-center'>
-                        <div className='mr-5'><span className='text-4xl font-bold'>Laptop <span className='text-[#fb6230]'>Zone</span></span></div>
+                        <div className='mr-5 lg:text-white'><span className='text-4xl font-bold'>Laptop <span className='text-[#fb6230]'>Zone</span></span></div>
                     </div>
                 </Link>
                 {/*  */}
@@ -81,13 +80,13 @@ const Navbar = () => {
 
 
             <div className="navbar-center hidden lg:flex">
-                <ul className="menu menu-horizontal p-0 ">
+                <ul className="menu menu-horizontal p-0 text-white">
                     {menuItems}
                 </ul>
             </div>
             <div className="navbar-end ">
 
-                <ul className="menu menu-horizontal p-0 transition transform hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:transform-none mr-3">
+                <ul className="  menu menu-horizontal p-0 transition transform hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:transform-none mr-3 text-[#fb6230]">
                     <ul >
                         {
                             user?.uid ?

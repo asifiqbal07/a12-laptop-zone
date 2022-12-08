@@ -20,7 +20,7 @@ const AddProduct = () => {
     const { data: brands = [], isLoading } = useQuery({
         queryKey: ['Brand'],
         queryFn: async () => {
-            const res = await fetch('https://laptop-zone-server.vercel.app/laptops');
+            const res = await fetch('http://localhost:5000/laptops');
             const data = await res.json();
             return data;
         }
@@ -58,7 +58,7 @@ const AddProduct = () => {
                     email: user.email
                 }
 
-                fetch('https://laptop-zone-server.vercel.app/products', {
+                fetch('http://localhost:5000/products', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json',

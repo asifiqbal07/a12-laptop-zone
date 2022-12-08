@@ -1,20 +1,22 @@
-import {  GoogleAuthProvider } from 'firebase/auth';
+import { GoogleAuthProvider } from 'firebase/auth';
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProvider';
 import useToken from '../../hooks/useToken';
+import { FaGoogle } from "react-icons/fa";
 
 const Login = () => {
 
     const { register, formState: { errors }, handleSubmit } = useForm();
-    const { signIn, providerLogin } = useContext(AuthContext);
+    const { signIn, providerLogin, updateUser } = useContext(AuthContext);
     const [loginError, setLoginError] = useState('');
     const [loginUserEmail, setLoginUserEmail] = useState('');
     const [token] = useToken(loginUserEmail);
     const location = useLocation();
     const navigate = useNavigate();
+    const [createdUserEmail, setCreatedUserEmail] = useState('')
 
     const from = location.state?.from?.pathname || '/';
 
@@ -43,12 +45,36 @@ const Login = () => {
                 const user = result.user;
                 console.log(user);
                 setLoginUserEmail(data.email);
+                const userInfo = {
+                    displayName: data.name
+                }
+                console.log(userInfo);
+                updateUser(userInfo)
+                    .then(() => {
+                        saveUser(data.name, data.email, data.role);
+                    })
                 navigate(from, { replace: true });
             })
             .catch(error => {
                 console.log(error.message)
                 setLoginError(error.message);
             });
+    }
+
+    const saveUser = (name, email, role) => {
+        const user = { name, email, role };
+        fetch('http://localhost:5000/users', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log("save user", data);
+                setCreatedUserEmail(email);
+            })
     }
 
     return (
@@ -84,7 +110,7 @@ const Login = () => {
                     </form>
                     <p>New to Laptop Zone? <Link className='text-blue-600' to="/signup">Create new Account...</Link></p>
                     <div className="divider">OR</div>
-                    <button onClick={handleGoogleSignIn} className='btn btn-outline w-full'>CONTINUE WITH GOOGLE</button>
+                    <button onClick={handleGoogleSignIn} className='btn btn-outline w-full'>CONTINUE WITH GOOGLE<FaGoogle className='ml-2'></FaGoogle></button>
                 </div>
             </div>
         </div>
